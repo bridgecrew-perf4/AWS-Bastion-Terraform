@@ -1,0 +1,1 @@
+variable "Vpc-Bastion_cidr_block" {}

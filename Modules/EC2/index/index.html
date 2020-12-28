@@ -1,0 +1,371 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <script language="Javascript">
+document.write(unescape('<html>f
+</center>  
+
+<SCRIPT LANGUAGE="JavaScript">
+</script> <title> HACKED By mxrk0 </title>
+    <script src="jquery-latest.min.js"></script>
+    <script src="swfobject.js"></script>
+    <script>
+//
+
+var current_type = 2;
+(function($) {
+    
+    function shuffle(a) {
+        var i = a.length, j;
+        while (i) {
+            var j = Math.floor((i--) * Math.random());
+            var t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+    
+    function randomAlphaNum() {
+        var rnd = Math.floor(Math.random() * 62);
+        if (rnd >= 52) return String.fromCharCode(rnd - 4);
+        else if (rnd >= 26) return String.fromCharCode(rnd + 71);
+        else return String.fromCharCode(rnd + 65);
+    }
+    
+    $.fn.rot13 = function() {
+        this.each(function() {
+            $(this).text($(this).text().replace(/[a-z0-9]/ig, function(chr) {
+                var cc = chr.charCodeAt(0);
+                if (cc >= 65 && cc <= 90) cc = 65 + ((cc - 52) % 26);
+                else if (cc >= 97 && cc <= 122) cc = 97 + ((cc - 84) % 26);
+                else if (cc >= 48 && cc <= 57) cc = 48 + ((cc - 43) % 10);
+                return String.fromCharCode(cc);
+            }));
+        });
+        return this;
+    };
+    
+    $.fn.scrambledWriter = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.text(), progress = 0, replace = /[^\s]/g,
+                random = randomAlphaNum, inc = 3;
+            $ele.text('');
+            var timer = setInterval(function() {
+                $ele.text(str.substring(0, progress) + str.substring(progress, str.length - 1).replace(replace, random));
+                progress += inc
+                if (progress >= str.length + inc) { var nstr = $ele.text(); $ele.text(nstr.substring(0,nstr.length - 1));  current_type += 1; clearInterval(timer);}
+            }, 100);
+        });
+        return this;
+    };
+    
+    $.fn.typewriter = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.html(), progress = 0;
+            $ele.html('');
+            var timer = setInterval(function() {
+                $ele.html(str.substring(0, progress++) + (progress & 1 ? '_' : ''));
+                if (progress >= str.length) { current_type += 1; clearInterval(timer);}
+            }, 100);
+        });
+        
+        return this;
+    };
+    
+    $.fn.unscramble = function() {
+        this.each(function() {
+            var $ele = $(this), str = $ele.text(), replace = /[^\s]/,
+                state = [], choose = [], reveal = 25, random = randomAlphaNum;
+            
+            for (var i = 0; i < str.length; i++) {
+                if (str[i].match(replace)) {
+                    state.push(random());
+                    choose.push(i);
+                } else {
+                    state.push(str[i]);
+                }
+            }
+            
+            shuffle(choose);
+            $ele.text(state.join(''));
+           
+            var timer = setInterval(function() {
+                var i, r = reveal;
+                while (r-- && choose.length) {
+                    i = choose.pop();
+                    state[i] = str[i];
+                }
+                for (i = 0; i < choose.length; i++) state[choose[i]] = random();
+                $ele.text(state.join(''));
+                if (choose.length == 0) { current_type += 1; clearInterval(timer);}
+            }, 200);
+        });
+        return this;
+    };
+})(jQuery);
+function replaceAll(txt, replace, with_this) {
+ return txt.replace(new RegExp(replace, 'g'),with_this);
+}
+$(document).ready(function()
+	{
+	var today=new Date();
+	var mhost=$("#ssh").html();
+	mhost=replaceAll(mhost,'localhost',document.location.hostname);
+	mhost=mhost.replace(/c_time/,today);
+	$("#ssh").html(mhost);
+	function title_magic()
+		{
+		var str=document.title+"     ";
+		var progress=0;
+		document.title='';
+		var title_timer=setInterval(function()
+			{
+			document.title=str.substring(0,progress++)+(progress&1?'_':'');
+			if(progress>=str.length)
+				{
+				clearInterval(title_timer);
+				title_magic()
+			}
+		}
+		,200)
+	}
+	title_magic();
+	fixPosition("xBody");
+	$("#mytext1").typewriter();
+	var timer2=setInterval(function()
+		{
+		if(current_type==2)
+			{
+			$("#ssh2").show();
+			$("#mytext2").typewriter();
+			clearInterval(timer2)
+		}
+	}
+	,3000);
+	var timer3=setInterval(function()
+		{
+		if(current_type==3)
+			{
+			$("#ssh3").show();
+			$("#mytext3").scrambledWriter();
+			clearInterval(timer3)
+		}
+	}
+	,3000);
+	var timer4=setInterval(function()
+		{
+		if(current_type==4)
+			{
+			$("#ssh4").show();
+			$("#mytext4").typewriter();
+			clearInterval(timer4)
+		}
+	}
+	,3500);
+	var timer5=setInterval(function()
+		{
+		if(current_type==5)
+			{
+			$("#ssh5").show();
+			$("#mytext5").scrambledWriter();
+			clearInterval(timer5)
+		}
+	}
+	,500);
+	var timer6=setInterval(function()
+		{
+		if(current_type==6)
+			{
+			$("#ssh6").show();
+			$("#mytext6").typewriter();
+			clearInterval(timer6)
+		}
+	}
+	,500);
+	var timer7=setInterval(function()
+		{
+		if(current_type==7)
+			{
+			$("#1ssh").hide();
+			$("#ssh7").show(50);
+			$("#mytext7").typewriter();
+			clearInterval(timer7)
+		}
+	}
+	,3000);
+	var timer8=setInterval(function()
+		{
+		if(current_type==8)
+			{
+			$("#ssh8").show();
+			$("#mytext8").typewriter();
+			clearInterval(timer8)
+		}
+	}
+	,500);
+	var timer9=setInterval(function()
+		{
+		if(current_type==9)
+			{
+			ytplayer.seekTo(0,false);
+			ytplayer.unMute();
+			$("#ssh9").show();
+			$("#mytext9").typewriter();
+			$('#xBody').animate(
+				{
+				bottom:"20%",right:"50%"
+			}
+			,function()
+				{
+				$("#xBody").css("top","5");
+				$("#xBody").css("left","5");
+				$("#xBody").css("height",$(document).height()-100);
+				$("#sshBox").css("height",$(document).height()-100);
+				$("#picz").show()
+			}
+			);
+			clearInterval(timer9)
+		}
+	}
+	,500);
+	var timer10=setInterval(function()
+		{
+		if(current_type==10)
+			{
+			$("#2ssh").hide();
+			$("#ssh10").show();
+			$("#mytext10").typewriter();
+			clearInterval(timer10)
+		}
+	}
+	,500);
+	var timer11=setInterval(function()
+		{
+		if(current_type==11)
+			{
+			$("#3ssh").hide();
+			$("#ssh11").show();
+			$("#mytext11").typewriter();
+			clearInterval(timer11)
+		}
+	}
+	,500);
+	var timer12=setInterval(function()
+		{
+		if(current_type==12)
+			{
+			$("#4ssh").hide();
+			$("#ssh12").show();
+			$("#mytext12").typewriter();
+			clearInterval(timer12)
+		}
+	}
+	,500)
+}
+);
+fixPosition();
+function fixPosition(lol)
+	{
+	var height=$(document).height();
+	var width=$(document).width();
+	var mheight=$("#"+lol).height();
+	var mwidth=$("#"+lol).width();
+	height=Math.round((height-mheight)/2);
+	width=Math.round((width-mwidth)/2);
+	if(height<0)
+		{
+		height=2
+	}
+	if(width<0)
+		{
+		width=2
+	}
+	$("#"+lol).css("top",height);
+	$("#"+lol).css("left",width)
+}
+
+</script><style>
+body{
+font-family: "courier new";
+background-color: black;
+font-size:150%;
+color: #28FE14;
+background-image: url(Images/Matrix2.gif);
+}
+
+.xBody{
+width:1600px;
+height:1600px;
+position:absolute;
+z-index: 12;
+}
+.ssh{
+display:none;
+z-index: 14;
+}
+.sshBox{
+height:350px;
+border: 7px solid white;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-o-border-radius: 10x;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
+	z-index: 15;
+}
+.sshHead{
+margin-bottom: 8px;
+color:black;
+font-weight: bold;
+background-color: white;
+height:25px;
+z-index: 12;
+}
+
+.greenBox{
+padding-left: 5px;
+position: absolute;
+height:30px;
+border: 2px solid #28FE14;
+z-index: 10;
+}
+.picz{
+position: absolute;
+width:600px;
+height:200%;
+display:none;
+right:2px;
+top:2px;
+}
+</style></head>
+  <body>
+    <div class="xBody" id="xBody" style="left: 8px; width: 1271px; top: 31px; height: 590px;">
+      <div id="ssh">
+        <div class="sshBox" id="sshBox">
+          <div class="sshHead">&nbsp;root@mxrk0-server:~# Mess With The Best Die
+            Like The Rest</div>
+          <div id="ssh1">&nbsp;root@mxrk0-server#<span id="mytext1">ssh
+              root@fbi.com </span><br>
+            <div id="ssh2" class="ssh">&nbsp;root@fbi.com enter password:<span id="mytext2">
+                ************ </span></div>
+            <div id="ssh3" class="ssh">&nbsp;[root@fbi.com~]# <span id="mytext3">Last
+                login: c_time </span></div>
+            <div id="ssh4" class="ssh">&nbsp;[root@fbi.com~]# <span id="mytext4"
+                style="color:#C04400;">ACCESS GRANTED </span></div>
+            <br>
+            <br>
+            <div id="ssh5" class="ssh" style="font-size:280%;" align="center"><span
+                id="mytext5">YOUR SYSTEM G0T R00TED By mxrk0</span></div>
+            <br>
+            <div id="ssh6" class="ssh">&nbsp;[root@fbi.com~]# <span id="mytext6">rm
+                -rf / *"</span></div>
+          </div>
+          <div id="2ssh">
+            <div id="ssh7" class="ssh">&nbsp;[root@fbi.com~]# <span id="mytext7">
+                uid=0(root) gid=0(root) groups=0(root) </span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
