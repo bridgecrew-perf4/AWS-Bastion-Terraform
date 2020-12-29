@@ -65,23 +65,23 @@ resource "aws_instance" "BASTION" {
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/index" /* Copia de mi local */
-    destination = "/tmp/" /* Copia al /tmp/ remoto */
+    source      = "./Modules/EC2/index" # Copia de mi local
+    destination = "/tmp/" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/provisioner.sh" /* Copia de mi local */
-    destination = "/tmp/provisioner.sh" /* Copia al /tmp/ remoto */
+    source      = "./Modules/EC2/provisioner.sh" # Copia de mi local
+    destination = "/tmp/provisioner.sh" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/nginx.sh" /* Copia de mi local */
-    destination = "/tmp/nginx.sh" /* Copia al /tmp/ remoto */
+    source      = "./Modules/EC2/nginx.sh" # Copia de mi local
+    destination = "/tmp/nginx.sh" # Copia al /tmp/ remoto
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/aws-key.pem" /* Copia de mi local */
-    destination = "/tmp/aws-key.pem" /* Copia al /tmp/ remoto */
+    source      = "./Modules/EC2/aws-key.pem" # Copia de mi local
+    destination = "/tmp/aws-key.pem" # Copia al /tmp/ remoto
   }
 
   provisioner "remote-exec" {
