@@ -16,8 +16,14 @@ variable "Security_Group_Bastion_Id" {
   description = "Bastion Security Group Id"
 }
 
-variable "Aws_Instance_NGINX_private_ip" {}
+variable "Aws_Instance_NGINX_private_ip" {
+  description = "NGINX Private Ip"
+}
 
-variable "Aws_Instance_BASTION_private_ip" {}
+variable "Aws_Instance_BASTION_private_ip" {
+  description = "BASTION Private Ip"
+}
 
-variable "Aws_Instance_Type" {}
+variable "Aws_Instance_Type" {
+  description = "Size of the Instances"
+}
