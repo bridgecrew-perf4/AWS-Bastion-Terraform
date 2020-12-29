@@ -1,15 +1,21 @@
-data "aws_ami" "Ubuntu-focal-20-04-latest" {
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-arm64-server-*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
 }
 
 resource "aws_instance" "NGINX" {
-  ami                         = "ami-0a91cd140a1fc148a"
+  ami                         = data.aws_ami.ubuntu.id
   availability_zone           = "us-east-2a"
   ebs_optimized               = false
   instance_type               = var.Aws_Instance_Type
@@ -34,7 +40,7 @@ resource "aws_instance" "NGINX" {
 }
 
 resource "aws_instance" "BASTION" {
-  ami                         = "ami-0a91cd140a1fc148a"
+  ami                         = data.aws_ami.ubuntu.id
   availability_zone           = "us-east-2a"
   ebs_optimized               = false
   instance_type               = var.Aws_Instance_Type
@@ -54,6 +60,7 @@ resource "aws_instance" "BASTION" {
   }
 
   tags = {
+    Name = "BASTION"
     Name = "BASTION"
   }
 
