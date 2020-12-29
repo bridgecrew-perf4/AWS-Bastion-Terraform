@@ -1,5 +1,4 @@
 # GLOBAL CONFIG AND VARIABLES
-
 module "Virtual_Private_Cloud" {
   source                 = "./Modules/VPC"
   Vpc-Bastion_cidr_block = "10.0.0.0/16"
@@ -22,8 +21,6 @@ module "Security_Group" {
   Bastion_SG_HTTP_DNS_cidr_blocks = "0.0.0.0/0"
   Load_Balancer_SG_cidr_blocks    = "0.0.0.0/0"
 }
-
-
 
 module "Internet_Gateway" {
   source         = "./Modules/IG"
