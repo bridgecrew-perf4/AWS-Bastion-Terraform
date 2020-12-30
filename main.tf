@@ -1,4 +1,14 @@
 # GLOBAL CONFIG AND VARIABLES
+
+module "Access" {
+  source = "./Access"
+}
+provider "aws" {
+  region = module.Access.region
+  access_key = module.Access.access_key
+  secret_key = module.Access.secret_key
+}
+
 module "Virtual_Private_Cloud" {
   source                 = "./Modules/VPC"
   Vpc-Bastion_cidr_block = "10.0.0.0/16"

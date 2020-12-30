@@ -80,7 +80,7 @@ resource "aws_instance" "BASTION" {
   }
 
   provisioner "file" {
-    source      = "./Key/aws-key.pem" # Copia de mi local
+    source      = "./Access/aws-key.pem" # Copia de mi local
     destination = "/tmp/aws-key.pem" # Copia al /tmp/ remoto
   }
 
@@ -103,6 +103,6 @@ resource "aws_instance" "BASTION" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("./Key/aws-key.pem")
+    private_key = file("./Access/aws-key.pem")
   }
 }
