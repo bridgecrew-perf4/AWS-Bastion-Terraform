@@ -1,7 +1,10 @@
 ### Terraform ###
-# Local .terraform directories
+# The next Folders & Files should not be uploaded to github
 **/.terraform/*
 **/.idea/*
-
+/Key
 terraform.tfstate
+terraform.tfvars
 terraform.tfstate.backup
+.terraform.tfstate.lock.info
+crash.log
