@@ -2,7 +2,7 @@
 # The next Folders & Files should not be uploaded to github
 **/.terraform/*
 **/.idea/*
-/Key
+**/Key/*
 terraform.tfstate
 terraform.tfvars
 terraform.tfstate.backup
