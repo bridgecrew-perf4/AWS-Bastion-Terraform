@@ -5,6 +5,6 @@ resource "aws_vpc" "Vpc-Bastion" {
   instance_tenancy     = "default"
 
   tags = {
-    Name = "Vpc-Bastion"
+    Name = "Vpc-Bastion-${var.Env}"
   }
 }

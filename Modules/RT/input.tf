@@ -1,16 +1,10 @@
 # VARIABLES ROUTE TABLES RT #
-variable "Vpc-Bastion_id" {
-  description = "VPC Bastion ID"
-}
+variable "Vpc-Bastion_id" {}
 
-variable "Internet-Gateway_id" {
-  description = "Internet Gateway ID"
-}
+variable "Internet-Gateway_id" {}
 
-variable "Subnet-Public_id" {
-  description = "Subnet Public ID"
-}
+variable "Subnet-Public_id" {}
 
-variable "Route_Table-Public_cidr_block" {
-  description = "Route Table Cidr_block"
-}
+variable "Route_Table-Public_cidr_block" {}
+
+variable "Env" {}

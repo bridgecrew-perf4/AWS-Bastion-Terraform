@@ -25,4 +25,7 @@ resource "aws_elb" "Load-Balance-My-Website" {
     target              = "HTTP:80/"
     timeout             = 5
   }
+  tags = {
+    Name = "Elastic-Load-Balancer-${var.Env}"
+  }
 }

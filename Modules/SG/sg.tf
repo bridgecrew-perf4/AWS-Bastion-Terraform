@@ -42,6 +42,10 @@ resource "aws_security_group" "Bastion-SG" {
     cidr_blocks     = [var.Bastion_SG_HTTP_DNS_cidr_blocks] # 0.0.0.0/0
   }
 
+  tags = {
+    Name = "Bastion-SG-${var.Env}"
+  }
+
 }
 
 resource "aws_security_group" "Private-SG" {
@@ -71,6 +75,10 @@ resource "aws_security_group" "Private-SG" {
     protocol    = "tcp"
     cidr_blocks = [var.Subnet-Public_Cidr_block] # 10.0.10.0/24
   }
+
+  tags = {
+    Name = "Private-SG-${var.Env}"
+  }
 }
 
 resource "aws_security_group" "Load-Balancer-SG" {
@@ -93,4 +101,7 @@ resource "aws_security_group" "Load-Balancer-SG" {
     cidr_blocks = [var.Subnet-Private_Cidr_block] # 10.0.20.0/24
   }
 
+  tags = {
+    Name = "Load-Balancer-SG-${var.Env}"
+  }
 }

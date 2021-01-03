@@ -35,7 +35,7 @@ resource "aws_instance" "NGINX" {
   }
 
   tags = {
-    Name = "NGINX"
+    Name = "NGINX-${var.Env}"
   }
 }
 
@@ -60,27 +60,26 @@ resource "aws_instance" "BASTION" {
   }
 
   tags = {
-    Name = "BASTION"
-    Name = "BASTION"
+    Name = "BASTION-${var.Env}"
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/index" # Copia de mi local
+    source      = "../Modules/EC2/index" # Copia de mi local
     destination = "/tmp/" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/provisioner.sh" # Copia de mi local
+    source      = "../Modules/EC2/provisioner.sh" # Copia de mi local
     destination = "/tmp/provisioner.sh" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "./Modules/EC2/nginx.sh" # Copia de mi local
+    source      = "../Modules/EC2/nginx.sh" # Copia de mi local
     destination = "/tmp/nginx.sh" # Copia al /tmp/ remoto
   }
 
   provisioner "file" {
-    source      = "./Access/aws-key.pem" # Copia de mi local
+    source      = "../Access/aws-key.pem" # Copia de mi local
     destination = "/tmp/aws-key.pem" # Copia al /tmp/ remoto
   }
 
@@ -103,6 +102,6 @@ resource "aws_instance" "BASTION" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("./Access/aws-key.pem")
+    private_key = file("../Access/aws-key.pem")
   }
 }
