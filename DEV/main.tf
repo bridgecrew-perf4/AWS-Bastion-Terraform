@@ -1,4 +1,4 @@
-# GLOBAL CONFIG AND VARIABLES FOR PROD ONLY
+# GLOBAL CONFIG AND VARIABLES FOR DEV ONLY
 
 module "Access" {
   source = "../Access"
@@ -10,14 +10,14 @@ provider "aws" {
 }
 
 module "Virtual_Private_Cloud" {
-  Env                    = "PROD"
+  Env                    = "DEV"
   source                 = "../Modules/VPC"
   Vpc-Bastion_cidr_block = "10.0.0.0/16"
 
 }
 
 module "Subnets" {
-  Env                       = "PROD"
+  Env                       = "DEV"
   source                    = "../Modules/SN"
   Vpc-Bastion_id            = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Subnet-Public_cidr_block  = "10.0.10.0/24"
@@ -26,7 +26,7 @@ module "Subnets" {
 }
 
 module "Security_Group" {
-  Env                             = "PROD"
+  Env                             = "DEV"
   source                          = "../Modules/SG"
   Vpc-Bastion_id                  = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Subnet-Private_Cidr_block       = module.Subnets.Subnet-Private_Cidr_block # 10.0.20.0/24
@@ -37,13 +37,13 @@ module "Security_Group" {
 }
 
 module "Internet_Gateway" {
-  Env                             = "PROD"
+  Env                             = "DEV"
   source         = "../Modules/IG"
   Vpc-Bastion_id = module.Virtual_Private_Cloud.Vpc-Bastion_id
 }
 
 module "Route_Tables" {
-  Env                           = "PROD"
+  Env                           = "DEV"
   source                        = "../Modules/RT"
   Vpc-Bastion_id                = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Internet-Gateway_id           = module.Internet_Gateway.Internet-Gateway_id
@@ -52,7 +52,7 @@ module "Route_Tables" {
 }
 
 module "Elastic_Load_Balancer" {
-  Env                             = "PROD"
+  Env                             = "DEV"
   source                          = "../Modules/ELB"
   Subnet-Public_id                = module.Subnets.Subnet-Public_id
   Security_Group_Load_Balancer_Id = module.Security_Group.Load-Balancer-SG-id
@@ -60,7 +60,7 @@ module "Elastic_Load_Balancer" {
 }
 
 module "EC2" {
-  Env                             = "PROD"
+  Env                             = "DEV"
   source                          = "../Modules/EC2"
   Subnet-Private_id               = module.Subnets.Subnet-Private_id
   Subnet-Public_id                = module.Subnets.Subnet-Public_id
