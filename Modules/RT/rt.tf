@@ -8,7 +8,7 @@ resource "aws_route_table" "Route-Table-Public" {
   }
 
   tags = {
-    Name = "Route-Table-Public"
+    Name = "Route-Table-Public-${var.Env}"
   }
 }
 
@@ -21,6 +21,6 @@ resource "aws_route_table" "Route-Table-Private" {
   vpc_id = var.Vpc-Bastion_id
 
   tags = {
-    Name = "Route-Table-Private"
+    Name = "Route-Table-Private-${var.Env}"
   }
 }

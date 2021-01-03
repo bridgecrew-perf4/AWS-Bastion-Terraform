@@ -6,7 +6,7 @@ resource "aws_subnet" "Subnet-Public" {
 
 
   tags = {
-    Name = "Subnet-Public"
+    Name = "Subnet-Public-${var.Env}"
   }
 }
 
@@ -17,6 +17,6 @@ resource "aws_subnet" "Subnet-Private" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "Subnet-Private"
+    Name = "Subnet-Private-${var.Env}"
   }
 }
