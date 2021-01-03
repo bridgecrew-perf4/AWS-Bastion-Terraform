@@ -1,7 +1,7 @@
-# GLOBAL CONFIG AND VARIABLES
+# GLOBAL CONFIG AND VARIABLES FOR PROD ONLY
 
 module "Access" {
-  source = "./Access"
+  source = "../Access"
 }
 provider "aws" {
   region = module.Access.region
@@ -10,12 +10,15 @@ provider "aws" {
 }
 
 module "Virtual_Private_Cloud" {
-  source                 = "./Modules/VPC"
+  Env                    = "PROD"
+  source                 = "../Modules/VPC"
   Vpc-Bastion_cidr_block = "10.0.0.0/16"
+
 }
 
 module "Subnets" {
-  source                    = "./Modules/SN"
+  Env                       = "PROD"
+  source                    = "../Modules/SN"
   Vpc-Bastion_id            = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Subnet-Public_cidr_block  = "10.0.10.0/24"
   Subnet-Private_cidr_block = "10.0.20.0/24"
@@ -23,7 +26,8 @@ module "Subnets" {
 }
 
 module "Security_Group" {
-  source                          = "./Modules/SG"
+  Env                             = "PROD"
+  source                          = "../Modules/SG"
   Vpc-Bastion_id                  = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Subnet-Private_Cidr_block       = module.Subnets.Subnet-Private_Cidr_block # 10.0.20.0/24
   Subnet-Public_Cidr_block        = module.Subnets.Subnet-Public_Cidr_block  # 10.0.10.0/24
@@ -33,12 +37,14 @@ module "Security_Group" {
 }
 
 module "Internet_Gateway" {
-  source         = "./Modules/IG"
+  Env                             = "PROD"
+  source         = "../Modules/IG"
   Vpc-Bastion_id = module.Virtual_Private_Cloud.Vpc-Bastion_id
 }
 
 module "Route_Tables" {
-  source                        = "./Modules/RT"
+  Env                           = "PROD"
+  source                        = "../Modules/RT"
   Vpc-Bastion_id                = module.Virtual_Private_Cloud.Vpc-Bastion_id
   Internet-Gateway_id           = module.Internet_Gateway.Internet-Gateway_id
   Subnet-Public_id              = module.Subnets.Subnet-Public_id
@@ -46,14 +52,16 @@ module "Route_Tables" {
 }
 
 module "Elastic_Load_Balancer" {
-  source                          = "./Modules/ELB"
+  Env                             = "PROD"
+  source                          = "../Modules/ELB"
   Subnet-Public_id                = module.Subnets.Subnet-Public_id
   Security_Group_Load_Balancer_Id = module.Security_Group.Load-Balancer-SG-id
   EC2_NGINX_id                    = module.EC2.EC2_NGINX_id
 }
 
 module "EC2" {
-  source                          = "./Modules/EC2"
+  Env                             = "PROD"
+  source                          = "../Modules/EC2"
   Subnet-Private_id               = module.Subnets.Subnet-Private_id
   Subnet-Public_id                = module.Subnets.Subnet-Public_id
   Security_Group_Private_Id       = module.Security_Group.Private-SG-id
