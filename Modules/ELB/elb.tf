@@ -1,9 +1,9 @@
 resource "aws_elb" "Load-Balance-My-Website" {
   name                        = "My-Website"
-  depends_on                  = [var.Subnet-Public_id]
+  depends_on                  = [var.Subnet-Public_id,var.EC2_NGINX_id]
   subnets                     = [var.Subnet-Public_id]
   security_groups             = [var.Security_Group_Load_Balancer_Id]
-  instances                   = [var.EC2_NGINX_id]
+  instances                   = var.EC2_NGINX_id
   cross_zone_load_balancing   = false
   idle_timeout                = 60
   connection_draining         = false
