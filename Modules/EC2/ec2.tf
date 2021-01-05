@@ -65,17 +65,17 @@ resource "aws_instance" "BASTION" {
   }
 
   provisioner "file" {
-    source      = "../PROD/index" # Copia de mi local
+    source      = "../${var.Env}/index" # Copia de mi local
     destination = "/tmp/" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "../PROD/provisioner.sh" # Copia de mi local
+    source      = "../${var.Env}/provisioner.sh" # Copia de mi local
     destination = "/tmp/provisioner.sh" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "../PROD/nginx.sh" # Copia de mi local
+    source      = "../${var.Env}/nginx.sh" # Copia de mi local
     destination = "/tmp/nginx.sh" # Copia al /tmp/ remoto
   }
 

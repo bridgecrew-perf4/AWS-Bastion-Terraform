@@ -8,7 +8,7 @@ resource "aws_security_group" "Bastion-SG" {
     from_port   = 8888
     protocol    = "tcp"
     to_port     = 8888
-    cidr_blocks = [var.Subnet-Private_Cidr_block] # 10.0.20.0/24
+    cidr_blocks = [var.Subnet-Private_Cidr_block]
   }
 
   ingress {
@@ -16,7 +16,7 @@ resource "aws_security_group" "Bastion-SG" {
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
-    cidr_blocks = [var.Bastion_SG_SSH_cidr_blocks] # 0.0.0.0/0
+    cidr_blocks = [var.Bastion_SG_SSH_cidr_blocks]
   }
 
   egress {
@@ -24,14 +24,14 @@ resource "aws_security_group" "Bastion-SG" {
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
-    cidr_blocks     = [var.Bastion_SG_HTTP_DNS_cidr_blocks] # 0.0.0.0/0
+    cidr_blocks     = [var.Bastion_SG_HTTP_DNS_cidr_blocks]
   }
 
   egress {
     from_port       = 22
     to_port         = 22
     protocol        = "tcp"
-    cidr_blocks     = [var.Subnet-Private_Cidr_block] # 10.0.20.0/24
+    cidr_blocks     = [var.Subnet-Private_Cidr_block]
   }
 
   egress {
@@ -39,7 +39,7 @@ resource "aws_security_group" "Bastion-SG" {
     from_port       = 53
     to_port         = 53
     protocol        = "udp"
-    cidr_blocks     = [var.Bastion_SG_HTTP_DNS_cidr_blocks] # 0.0.0.0/0
+    cidr_blocks     = [var.Bastion_SG_HTTP_DNS_cidr_blocks]
   }
 
   tags = {
@@ -58,7 +58,7 @@ resource "aws_security_group" "Private-SG" {
     from_port   = 80
     protocol    = "tcp"
     to_port     = 80
-    cidr_blocks = [var.Subnet-Public_Cidr_block] # 10.0.10.0/24
+    cidr_blocks = [var.Subnet-Public_Cidr_block]
   }
 
   ingress {
@@ -66,14 +66,14 @@ resource "aws_security_group" "Private-SG" {
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
-    cidr_blocks = [var.Subnet-Public_Cidr_block] # 10.0.10.0/24
+    cidr_blocks = [var.Subnet-Public_Cidr_block]
   }
 
   egress {
     from_port   = 8888
     to_port     = 8888
     protocol    = "tcp"
-    cidr_blocks = [var.Subnet-Public_Cidr_block] # 10.0.10.0/24
+    cidr_blocks = [var.Subnet-Public_Cidr_block]
   }
 
   tags = {
@@ -90,7 +90,7 @@ resource "aws_security_group" "Load-Balancer-SG" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [var.Load_Balancer_SG_cidr_blocks] # 0.0.0.0/0
+    cidr_blocks = [var.Load_Balancer_SG_cidr_blocks]
   }
 
 
@@ -98,7 +98,7 @@ resource "aws_security_group" "Load-Balancer-SG" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [var.Subnet-Private_Cidr_block] # 10.0.20.0/24
+    cidr_blocks = [var.Subnet-Private_Cidr_block]
   }
 
   tags = {

@@ -4,19 +4,19 @@ until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
 done
 
 echo "***************************************************************************************************************"
-echo "Corriendo update"
+echo "Running update"
 apt update
 
 echo "***************************************************************************************************************"
-echo "Instala tinyproxy"
+echo "Install of tinyproxy"
 apt install -y tinyproxy
 
 echo "***************************************************************************************************************"
-echo "Actualiza tinyproxy.conf"
+echo "Updating parameters in tinyproxy.conf"
 sed -i 's 127.0.0.1 10.0.0.0/16 g' /etc/tinyproxy/tinyproxy.conf
 
 echo "***************************************************************************************************************"
-echo "Reinicia tinyproxy"
+echo "Restart of tinyproxy service"
 service tinyproxy restart
 echo "***************************************************************************************************************"
 
