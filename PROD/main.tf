@@ -61,12 +61,13 @@ module "Elastic_Load_Balancer" {
 
 module "EC2" {
   Env                             = "PROD"
+  Count_NGINX                     = 3
   source                          = "../Modules/EC2"
   Subnet-Private_id               = module.Subnets.Subnet-Private_id
   Subnet-Public_id                = module.Subnets.Subnet-Public_id
   Security_Group_Private_Id       = module.Security_Group.Private-SG-id
   Security_Group_Bastion_Id       = module.Security_Group.Bastion-SG-id
-  Aws_Instance_NGINX_private_ip   = "10.0.20.20"
+  Aws_Instance_NGINX_private_ip   = ["10.0.20.20","10.0.20.21","10.0.20.22"]
   Aws_Instance_BASTION_private_ip = "10.0.10.10"
   Aws_Instance_Type               = "t2.micro"
 }

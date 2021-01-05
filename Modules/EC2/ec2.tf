@@ -25,7 +25,8 @@ resource "aws_instance" "NGINX" {
   subnet_id                   = var.Subnet-Private_id
   vpc_security_group_ids      = [var.Security_Group_Private_Id]
   associate_public_ip_address = false
-  private_ip                  = var.Aws_Instance_NGINX_private_ip
+  count                       = var.Count_NGINX
+  private_ip                  = var.Aws_Instance_NGINX_private_ip[count.index]
   source_dest_check           = true
 
   root_block_device {
@@ -35,7 +36,7 @@ resource "aws_instance" "NGINX" {
   }
 
   tags = {
-    Name = "NGINX-${var.Env}"
+    Name = "NGINX-${var.Env}-0${count.index+1}"
   }
 }
 
@@ -64,17 +65,17 @@ resource "aws_instance" "BASTION" {
   }
 
   provisioner "file" {
-    source      = "../Modules/EC2/index" # Copia de mi local
+    source      = "../PROD/index" # Copia de mi local
     destination = "/tmp/" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "../Modules/EC2/provisioner.sh" # Copia de mi local
+    source      = "../PROD/provisioner.sh" # Copia de mi local
     destination = "/tmp/provisioner.sh" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "../Modules/EC2/nginx.sh" # Copia de mi local
+    source      = "../PROD/nginx.sh" # Copia de mi local
     destination = "/tmp/nginx.sh" # Copia al /tmp/ remoto
   }
 
