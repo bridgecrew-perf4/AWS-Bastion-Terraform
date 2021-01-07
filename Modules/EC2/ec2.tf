@@ -87,7 +87,7 @@ resource "aws_instance" "BASTION" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/provisioner.sh",
-      "sudo bash /tmp/provisioner.sh | tee ./provisioner.log ",
+      "sudo bash /tmp/provisioner.sh",
     ]
   }
 
@@ -95,7 +95,7 @@ resource "aws_instance" "BASTION" {
     inline = [
       "chmod +x /tmp/nginx.sh",
       "chmod 400 /tmp/aws-key.pem",
-      "sudo bash /tmp/nginx.sh | tee ./nginx.log ",
+      "cd /tmp && sudo ./nginx.sh ${join(" ",var.Aws_Instance_NGINX_private_ip)}"
     ]
   }
 
