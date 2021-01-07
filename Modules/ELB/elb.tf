@@ -1,5 +1,5 @@
 resource "aws_elb" "Load-Balance-My-Website" {
-  name                        = "My-Website"
+  name                        = "My-Website-${var.Env}"
   depends_on                  = [var.Subnet-Public_id,var.EC2_NGINX_id]
   subnets                     = [var.Subnet-Public_id]
   security_groups             = [var.Security_Group_Load_Balancer_Id]
