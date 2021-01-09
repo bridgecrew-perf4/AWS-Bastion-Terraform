@@ -69,5 +69,6 @@ module "EC2" {
   Security_Group_Bastion_Id       = module.Security_Group.Bastion-SG-id
   Aws_Instance_NGINX_private_ip   = ["10.0.20.20","10.0.20.21","10.0.20.22"]
   Aws_Instance_BASTION_private_ip = "10.0.10.10"
+  Vpc-Bastion_cidr_block          = module.Virtual_Private_Cloud.VPC-cidr_block
   Aws_Instance_Type               = "t2.micro"
 }

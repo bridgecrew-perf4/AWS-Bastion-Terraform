@@ -70,12 +70,12 @@ resource "aws_instance" "BASTION" {
   }
 
   provisioner "file" {
-    source      = "../${var.Env}/provisioner.sh" # Copia de mi local
+    source      = "../Scripts/provisioner.sh" # Copia de mi local
     destination = "/tmp/provisioner.sh" # Copia al /tmp/ remoto */
   }
 
   provisioner "file" {
-    source      = "../${var.Env}/nginx.sh" # Copia de mi local
+    source      = "../Scripts/nginx.sh" # Copia de mi local
     destination = "/tmp/nginx.sh" # Copia al /tmp/ remoto
   }
 
@@ -87,7 +87,7 @@ resource "aws_instance" "BASTION" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/provisioner.sh",
-      "sudo bash /tmp/provisioner.sh",
+      "sudo bash /tmp/provisioner.sh ${var.Vpc-Bastion_cidr_block}",
     ]
   }
 
@@ -95,7 +95,7 @@ resource "aws_instance" "BASTION" {
     inline = [
       "chmod +x /tmp/nginx.sh",
       "chmod 400 /tmp/aws-key.pem",
-      "cd /tmp && sudo ./nginx.sh ${join(" ",var.Aws_Instance_NGINX_private_ip)}"
+      "cd /tmp && sudo ./nginx.sh ${join(" ",var.Aws_Instance_NGINX_private_ip)} ${var.Aws_Instance_BASTION_private_ip}"
     ]
   }
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+ip=$1
+
 until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
   sleep 5
 done
@@ -13,10 +15,10 @@ apt install -y tinyproxy
 
 echo "***************************************************************************************************************"
 echo "Updating parameters in tinyproxy.conf"
-sed -i 's 127.0.0.1 10.0.0.0/16 g' /etc/tinyproxy/tinyproxy.conf
+
+sed -i 's 127.0.0.1 '$ip' g' /etc/tinyproxy/tinyproxy.conf
 
 echo "***************************************************************************************************************"
 echo "Restart of tinyproxy service"
 service tinyproxy restart
 echo "***************************************************************************************************************"
-
